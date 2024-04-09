@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Event {
+public class Event implements Comparable<Event> {
     private String title;
     private LocalDate date;
     private int venueCapacity;
@@ -87,5 +87,10 @@ public class Event {
     public String getBookingsStatus() {
         return "Total bookings: " + getBookings() + " - "
                 + "Still available: " + (getVenueCapacity() - getBookings());
+    }
+
+    @Override
+    public int compareTo(Event e) {
+        return getDate().compareTo(e.getDate());
     }
 }
