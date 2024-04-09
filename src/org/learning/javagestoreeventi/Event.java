@@ -83,4 +83,9 @@ public class Event {
     private void validateCapacity(int capacity) {
         if(capacity <= 0) throw new IllegalArgumentException("Capacity cannot be <= 0.");
     }
+
+    public String getBookingsStatus() {
+        return "Total bookings: " + getBookings() + " - "
+                + "Still available: " + (getVenueCapacity() - getBookings());
+    }
 }
