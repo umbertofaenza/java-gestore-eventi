@@ -52,7 +52,7 @@ public class Event {
         bookings += newBookings;
     }
 
-    public void removeBookings(int numberOfBookings) {
+    public void removeBookings(int numberOfBookings) throws IllegalArgumentException {
         if(numberOfBookings < 0) throw new IllegalArgumentException("Invalid number of bookings.");
         if(date.isBefore(LocalDate.now())) throw new IllegalArgumentException("Event has passed.");
         if(numberOfBookings > bookings) throw new IllegalArgumentException("Not enough bookings to remove.");
