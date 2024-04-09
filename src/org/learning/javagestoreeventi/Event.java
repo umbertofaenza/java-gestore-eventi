@@ -24,4 +24,29 @@ public class Event {
     private void validateCapacity(int capacity) {
         if(capacity <= 0) throw new IllegalArgumentException("Capacity cannot be <= 0.");
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) throws IllegalArgumentException {
+        validateDate(date);
+        this.date = date;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getVenueCapacity() {
+        return venueCapacity;
+    }
+
+    public int getBookings() {
+        return bookings;
+    }
 }
