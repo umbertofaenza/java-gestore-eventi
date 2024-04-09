@@ -1,6 +1,8 @@
 package org.learning.javagestoreeventi;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Event {
     private String title;
@@ -15,14 +17,6 @@ public class Event {
         this.date = date;
         this.venueCapacity = venueCapacity;
         bookings = 0;
-    }
-
-    private void validateDate(LocalDate date) {
-        if(date.isBefore(LocalDate.now())) throw new IllegalArgumentException("Inserted date is in the past.");
-    }
-
-    private void validateCapacity(int capacity) {
-        if(capacity <= 0) throw new IllegalArgumentException("Capacity cannot be <= 0.");
     }
 
     public LocalDate getDate() {
@@ -48,5 +42,45 @@ public class Event {
 
     public int getBookings() {
         return bookings;
+    }
+
+    public void addBookings(int newBookings) throws IllegalArgumentException {
+        if(newBookings < 0) throw new IllegalArgumentException("Invalid number of bookings.");
+        if(date.isBefore(LocalDate.now())) throw new IllegalArgumentException("Event has passed.");
+        if(newBookings > venueCapacity - bookings) throw new IllegalArgumentException("Not enough bookings available.");
+
+        bookings += newBookings;
+    }
+
+    public void removeBookings(int numberOfBookings) {
+        if(numberOfBookings < 0) throw new IllegalArgumentException("Invalid number of bookings.");
+        if(date.isBefore(LocalDate.now())) throw new IllegalArgumentException("Event has passed.");
+        if(numberOfBookings > bookings) throw new IllegalArgumentException("Not enough bookings to remove.");
+
+        bookings -= numberOfBookings;
+    }
+
+    @Override
+    public String toString() {
+        String formattedDate = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+
+        return formattedDate + " - " + title;
+    }
+
+    public String getDetails() {
+        return "Event{" +
+                "title='" + title + '\'' +
+                ", date=" + date +
+                ", venueCapacity=" + venueCapacity +
+                ", bookings=" + bookings +
+                '}';
+    }
+
+    private void validateDate(LocalDate date) {
+        if(date.isBefore(LocalDate.now())) throw new IllegalArgumentException("Inserted date is in the past.");
+    }
+
+    private void validateCapacity(int capacity) {
+        if(capacity <= 0) throw new IllegalArgumentException("Capacity cannot be <= 0.");
     }
 }
