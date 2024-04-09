@@ -18,10 +18,10 @@ public class Event {
     }
 
     private void validateDate(LocalDate date) {
-        if(date.isBefore(LocalDate.now())) throw new IllegalArgumentException();
+        if(date.isBefore(LocalDate.now())) throw new IllegalArgumentException("Inserted date is in the past.");
     }
 
     private void validateCapacity(int capacity) {
-        if(capacity <= 0) throw new IllegalArgumentException();
+        if(capacity <= 0) throw new IllegalArgumentException("Capacity cannot be <= 0.");
     }
 }
