@@ -18,7 +18,7 @@ public class Event {
     }
 
     private void validateDate(LocalDate date) {
-        if(date.isAfter(LocalDate.now())) throw new IllegalArgumentException();
+        if(date.isBefore(LocalDate.now())) throw new IllegalArgumentException();
     }
 
     private void validateCapacity(int capacity) {
